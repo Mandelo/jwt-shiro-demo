@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("user")
-public class UserEntity {
+@TableName("user_role")
+public class UserRoleEntity {
     @TableId
     private Integer id;
-    private String username;
-    private String password;
+    private Integer userId;
+    private Integer roleId;
 
 }
