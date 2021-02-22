@@ -12,4 +12,6 @@ public interface UserService {
 
     UserEntity selectByUsername(String username);
 
+    String getPassword(String username);
+
 }

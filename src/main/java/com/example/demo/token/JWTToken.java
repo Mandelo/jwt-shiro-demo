@@ -1,0 +1,27 @@
+package com.example.demo.token;
+
+import org.apache.shiro.authc.AuthenticationToken;
+
+/**
+ * @description:
+ * @author: luox
+ * @date： 2021/2/22
+ */
+
+public class JWTToken implements AuthenticationToken {
+    private String token;
+
+    public JWTToken(String token) {
+        this.token = token;
+    }
+
+    @Override
+    public Object getPrincipal() {
+        return token;
+    }
+
+    @Override
+    public Object getCredentials() {
+        return token;
+    }
+}

@@ -22,4 +22,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         queryWrapper.eq(UserEntity::getUsername,username);
         return baseMapper.selectOne(queryWrapper);
     }
+
+    @Override
+    public String getPassword(String username) {
+        LambdaQueryWrapper<UserEntity> condition = new LambdaQueryWrapper<>();
+        condition.eq(UserEntity::getUsername,username);
+        UserEntity userEntity = baseMapper.selectOne(condition);
+        return userEntity == null ? null : userEntity.getPassword();
+    }
 }

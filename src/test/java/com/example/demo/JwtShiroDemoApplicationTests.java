@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.entity.UserEntity;
+import com.example.demo.service.PermService;
 import com.example.demo.service.RoleService;
 import com.example.demo.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,9 @@ class JwtShiroDemoApplicationTests {
     @Autowired
     private RoleService roleService;
 
+    @Autowired
+    private PermService permService;
+
     @Test
     void contextLoads() {
     }
@@ -32,6 +36,12 @@ class JwtShiroDemoApplicationTests {
     void selectRoleList(){
         List<String> roleList = roleService.getRoleListByUsername("admin");
         System.out.println(roleList);
+    }
+
+    @Test
+    void selectPermList(){
+        List<String> permList = permService.getPermListByUsername("admin");
+        System.out.println(permList);
     }
 
 }

@@ -9,18 +9,18 @@ import lombok.NoArgsConstructor;
 /**
  * @description:
  * @author: luox
- * @date： 2021/2/19
+ * @date： 2021/2/22
  */
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("user")
-public class UserEntity {
+@TableName("permission")
+public class PermissionEntity {
+
     @TableId
     private Integer id;
-    private String username;
-    private String password;
-    private Integer ban;
+    private String permCode;
+    private String permName;
 
 }
