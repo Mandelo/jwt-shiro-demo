@@ -17,7 +17,6 @@ import java.io.UnsupportedEncodingException;
 @RestController
 public class LoginController {
 
-
     @Autowired
     private UserService userService;
 

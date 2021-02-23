@@ -18,7 +18,8 @@ import java.util.Date;
 public class JWTUtil {
 
     // 过期时间 24 小时
-    private static final long EXPIRE_TIME = 60 * 24 * 60 * 1000;
+//    private static final long EXPIRE_TIME = 60 * 24 * 60 * 1000;
+    private static final long EXPIRE_TIME = 1000 * 1000;
     // 密钥
     private static final String SECRET = "SHIRO+JWT";
 
@@ -55,7 +56,8 @@ public class JWTUtil {
         try {
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             //在token中附带了username信息
-            JWTVerifier verifier = JWT.require(algorithm)
+            JWTVerifier verifier = JWT
+                    .require(algorithm)
                     .withClaim("username", username)
                     .build();
             //验证 token

@@ -22,6 +22,9 @@ class JwtShiroDemoApplicationTests {
     @Autowired
     private PermService permService;
 
+    @Autowired
+    RedisUtil redisUtil;
+
     @Test
     void contextLoads() {
     }
@@ -42,6 +45,11 @@ class JwtShiroDemoApplicationTests {
     void selectPermList(){
         List<String> permList = permService.getPermListByUsername("admin");
         System.out.println(permList);
+    }
+
+    @Test
+    void testRedis(){
+        redisUtil.set("213","123");
     }
 
 }

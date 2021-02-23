@@ -85,7 +85,6 @@ public class CustomRealm extends AuthorizingRealm {
             if (null == userEntity) {
                 throw new AuthenticationException("该用户不存在！");
             } else {
-                String password = userEntity.getPassword();
                 if (userEntity.getBan() == 1) {
                     throw new AuthenticationException("该用户已被封号！");
                 } else {
