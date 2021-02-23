@@ -4,6 +4,7 @@ import com.example.demo.entity.UserEntity;
 import com.example.demo.service.PermService;
 import com.example.demo.service.RoleService;
 import com.example.demo.service.UserService;
+import com.example.demo.util.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,8 +49,14 @@ class JwtShiroDemoApplicationTests {
     }
 
     @Test
-    void testRedis(){
-        redisUtil.set("213","123");
+    void testRedisSet(){
+        redisUtil.set("张三","测试");
+    }
+
+    @Test
+    void testRedisGet(){
+        Object o = redisUtil.get("张三");
+        System.out.println(o.toString());
     }
 
 }
