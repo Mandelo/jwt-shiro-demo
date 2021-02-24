@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.entity.UserEntity;
 
+import java.io.Serializable;
+
 /**
  * @description:
  * @author: luox
@@ -14,4 +16,5 @@ public interface UserService {
 
     String getPassword(String username);
 
+    UserEntity getById(Serializable id);
 }

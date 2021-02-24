@@ -8,6 +8,8 @@ import com.example.demo.entity.UserEntity;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+
 /**
  * @description:
  * @author: luox
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
+
     @Override
     public UserEntity selectByUsername(String username) {
         LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
@@ -29,5 +32,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
         condition.eq(UserEntity::getUsername,username);
         UserEntity userEntity = baseMapper.selectOne(condition);
         return userEntity == null ? null : userEntity.getPassword();
+    }
+
+    @Override
+    public UserEntity getById(Serializable id) {
+        return baseMapper.selectById(id);
     }
 }

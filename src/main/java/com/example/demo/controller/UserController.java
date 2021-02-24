@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @description:
+ * @description: 用户相关
  * @author: luox
  * @date： 2021/2/22
  */
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+
     private final ResultMap resultMap;
 
     public UserController (UserService userService,ResultMap resultMap){
@@ -27,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/getMessage")
-    @RequiresRoles(logical = Logical.OR, value = {"user", "admin"})
+    @RequiresRoles(logical = Logical.OR, value = {"user"})
     public ResultMap getMessage() {
         return resultMap.success().code(200).message("成功获得信息！");
     }
