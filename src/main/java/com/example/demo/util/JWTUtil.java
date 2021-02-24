@@ -1,5 +1,6 @@
 package com.example.demo.util;
 
+import com.alibaba.fastjson.JSON;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -81,6 +82,17 @@ public class JWTUtil {
         } catch (JWTDecodeException e) {
             return null;
         }
+    }
+
+    public static MyAuth getAuthObject(String token){
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            String authString = jwt.getClaim("myAuth").asString();
+            return JSON.parseObject(authString, MyAuth.class);
+        } catch (JWTDecodeException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

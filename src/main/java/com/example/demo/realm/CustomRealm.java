@@ -1,11 +1,6 @@
 package com.example.demo.realm;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.example.demo.entity.UserEntity;
-import com.example.demo.service.PermService;
-import com.example.demo.service.RoleService;
-import com.example.demo.service.UserService;
 import com.example.demo.token.JWTToken;
 import com.example.demo.token.MyAuth;
 import com.example.demo.util.JWTUtil;
@@ -22,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,15 +27,6 @@ import java.util.Set;
 
 @Component
 public class CustomRealm extends AuthorizingRealm {
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private RoleService roleService;
-
-    @Autowired
-    private PermService permService;
 
     @Autowired
     private RedisUtil redisUtil;
@@ -84,26 +69,15 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         System.out.println("————身份认证方法————");
         String token = (String) authenticationToken.getCredentials();
-        // 解密获得username，用于和数据库进行对比
+        // 解密获得权限对象
         String authString = JWTUtil.getAuthString(token);
         MyAuth auth = JSON.parseObject(authString, MyAuth.class);
-
-
-//        String authString = (String) redisUtil.get(username);
         if (auth == null || !JWTUtil.verify(token, authString)) {
             throw new AuthenticationException("token认证失败！");
-        } else {
+        } else if(redisUtil.get(auth.getUsername()) == null){
+            throw new AuthenticationException("token过期！");
+        }else {
             return new SimpleAuthenticationInfo(token, token, "MyRealm");
-//            UserEntity userEntity = userService.selectByUsername(username);
-//            if (null == userEntity) {
-//                throw new AuthenticationException("该用户不存在！");
-//            } else {
-//                if (userEntity.getBan() == 1) {
-//                    throw new AuthenticationException("该用户已被封号！");
-//                } else {
-//                    return new SimpleAuthenticationInfo(token, token, "MyRealm");
-//                }
-//            }
         }
     }
 }

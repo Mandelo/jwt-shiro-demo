@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/getMessage")
-    @RequiresRoles(logical = Logical.OR, value = {"user"})
+    @RequiresRoles(logical = Logical.OR, value = {"user", "admin"})
     public ResultMap getMessage() {
         return resultMap.success().code(200).message("成功获得信息！");
     }
